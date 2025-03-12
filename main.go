@@ -8,6 +8,7 @@ import (
 	"itv_movies_web_server/internal/routes"
 	"itv_movies_web_server/internal/services"
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -38,5 +39,10 @@ func main() {
 
 	routes.RegisterUserRoutes(router, userController, db)
 
-	router.Run(":3001")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3001"
+	}
+
+	router.Run(":" + port)
 }
