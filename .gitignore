@@ -1,0 +1,45 @@
+# Binaries & Compiled files
+*.exe
+*.out
+*.o
+*.so
+*.a
+*.dll
+*.dylib
+*.test
+
+# OS-specific files
+.DS_Store
+*.swp
+*.swo
+*~
+/lost+found/
+/tmp/
+
+# Go modules & dependencies
+/vendor/
+go.sum
+go.work
+go.work.sum
+
+# IDE & Editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Secrets & Configuration files
+.env
+.env.local
+.env.*.local
+config.yaml
+config.json
+
+# Logs & Coverage files
+*.log
+*.cover
+coverage.out
+
+# Docker & Container-related files
+.dockerignore
+docker-compose.override.yml
