@@ -12,6 +12,10 @@ const (
 	PlatformUser Role = "user"
 )
 
+func (r *Role) GormDataType() string {
+	return "user_role"
+}
+
 type User struct {
 	ID       uuid.UUID `gorm:"type:uuid;not null;primaryKey"`
 	Name     string    `gorm:"type:varchar(255);not null"`

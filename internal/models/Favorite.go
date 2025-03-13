@@ -6,8 +6,8 @@ import (
 )
 
 type Favorite struct {
-	UserID  uuid.UUID `gorm:"type:uuid;not null"`
-	MovieID uuid.UUID `gorm:"type:uuid;not null"`
+	UserID  uuid.UUID `gorm:"type:uuid;not null" json:"user_id"`
+	MovieID uuid.UUID `gorm:"type:uuid;not null" json:"movie_id"`
 
 	User  User  `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE"`
 	Movie Movie `gorm:"foreignKey:MovieID;constraint:OnDelete:CASCADE"`
