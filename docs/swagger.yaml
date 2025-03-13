@@ -1,0 +1,403 @@
+basePath: /
+definitions:
+  models.Genre:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      movies:
+        items:
+          $ref: '#/definitions/models.Movie'
+        type: array
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Movie:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      director:
+        type: string
+      genres:
+        items:
+          $ref: '#/definitions/models.Genre'
+        type: array
+      id:
+        type: string
+      plot:
+        type: string
+      title:
+        type: string
+      trailer_url:
+        type: string
+      updated_at:
+        type: string
+      video_file_path:
+        type: string
+      year:
+        type: integer
+    type: object
+  models.Role:
+    enum:
+    - admin
+    - user
+    type: string
+    x-enum-varnames:
+    - Admin
+    - PlatformUser
+  models.Transaction:
+    properties:
+      amount:
+        type: number
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      payment_method:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      role:
+        $ref: '#/definitions/models.Role'
+      updated_at:
+        type: string
+    type: object
+host: ::host
+info:
+  contact: {}
+  description: API Docs for ITV Movies Web Server.
+  title: ITV Movies Web Server API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint allows users to log in using their email and password
+      parameters:
+      - description: User login credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Authenticate a user
+      tags:
+      - User
+  /create/genre:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint is used to add a new genre
+      parameters:
+      - description: New genre details
+        in: body
+        name: genre
+        required: true
+        schema:
+          $ref: '#/definitions/models.Genre'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Genre'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add a new genre
+      tags:
+      - Genre
+  /create/movie:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint is used to add a new movie
+      parameters:
+      - description: New movie details
+        in: body
+        name: movie
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Movie'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add a new movie
+      tags:
+      - Movie
+  /create/transactions:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint is used to create a new transaction
+      parameters:
+      - description: Transaction details
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/models.Transaction'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Transaction'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new transaction
+      tags:
+      - Transaction
+  /load/genres:
+    get:
+      consumes:
+      - application/json
+      description: Returns a list of all available genres
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Genre'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve all genres
+      tags:
+      - Genre
+  /load/movies:
+    get:
+      consumes:
+      - application/json
+      description: Returns a list of all available movies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Movie'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve all movies
+      tags:
+      - Movie
+  /load/transactions:
+    get:
+      consumes:
+      - application/json
+      description: This endpoint returns a list of all transactions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Transaction'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve all transactions
+      tags:
+      - Transactions
+  /load/users:
+    get:
+      consumes:
+      - application/json
+      description: This endpoint returns a list of all registered users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve all users
+      tags:
+      - User
+  /register/user:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint allows creating a new user with Name, Email, and
+        Password
+      parameters:
+      - description: User registration details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register a new user
+      tags:
+      - User
+  /update/movie:
+    put:
+      consumes:
+      - application/json
+      description: This endpoint updates the details of an existing movie
+      parameters:
+      - description: Updated movie details
+        in: body
+        name: movie
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update an existing movie
+      tags:
+      - Movie
+swagger: "2.0"

@@ -16,6 +16,16 @@ func NewUserController(userService services.UserService) *UserController {
 	return &UserController{userService}
 }
 
+// GetUsers - Retrieve all users
+//
+//	@Summary		Retrieve all users
+//	@Description	This endpoint returns a list of all registered users
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		models.User
+//	@Failure		500	{object}	map[string]string
+//	@Router			/load/users [get]
 func (c *UserController) GetUsers(ctx *gin.Context) {
 	users, err := c.userService.GetUsers()
 	if err != nil {
@@ -25,7 +35,19 @@ func (c *UserController) GetUsers(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, users)
 }
 
-func (c *UserController) CreateUser(ctx *gin.Context) {
+// CreateUser - Register a new user
+//
+//	@Summary		Register a new user
+//	@Description	This endpoint allows creating a new user with Name, Email, and Password
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Param			user	body		models.User	true	"User registration details"
+//	@Success		201		{object}	models.User
+//	@Failure		400		{object}	map[string]string
+//	@Failure		500		{object}	map[string]string
+//	@Router			/register/user [post]
+func (c *UserController) RegisterUser(ctx *gin.Context) {
 	var user models.User
 	if err := ctx.ShouldBindJSON(&user); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
@@ -45,6 +67,18 @@ func (c *UserController) CreateUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, user)
 }
 
+// Login - User authentication
+//
+//	@Summary		Authenticate a user
+//	@Description	This endpoint allows users to log in using their email and password
+//	@Tags			User
+//	@Accept			json
+//	@Produce		json
+//	@Param			credentials	body		models.User	true	"User login credentials"
+//	@Success		200			{object}	map[string]string
+//	@Failure		400			{object}	map[string]string
+//	@Failure		401			{object}	map[string]string
+//	@Router			/auth/login [post]
 func (uc *UserController) Login(ctx *gin.Context) {
 	var loginData struct {
 		Email    string `json:"email" binding:"required,email"`

@@ -16,6 +16,15 @@ func NewGenreController(genreService services.GenreService) *GenreController {
 	return &GenreController{genreService}
 }
 
+// LoadGenres - Retrieve all genres
+//	@Summary		Retrieve all genres
+//	@Description	Returns a list of all available genres
+//	@Tags			Genre
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		models.Genre
+//	@Failure		500	{object}	map[string]string
+//	@Router			/load/genres [get]
 func (c *GenreController) LoadGenres(ctx *gin.Context) {
 	genres, err := c.genreService.LoadGenres()
 	if err != nil {
@@ -25,6 +34,17 @@ func (c *GenreController) LoadGenres(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, genres)
 }
 
+// CreateGenre - Add a new genre
+//	@Summary		Add a new genre
+//	@Description	This endpoint is used to add a new genre
+//	@Tags			Genre
+//	@Accept			json
+//	@Produce		json
+//	@Param			genre	body		models.Genre	true	"New genre details"
+//	@Success		201		{object}	models.Genre
+//	@Failure		400		{object}	map[string]string
+//	@Failure		500		{object}	map[string]string
+//	@Router			/create/genre [post]
 func (c *GenreController) CreateGenre(ctx *gin.Context) {
 	var genre models.Genre
 	if err := ctx.ShouldBindJSON(&genre); err != nil {

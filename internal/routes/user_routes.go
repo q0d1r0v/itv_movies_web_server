@@ -17,7 +17,7 @@ func RegisterUserRoutes(router *gin.Engine, userController *controllers.UserCont
 		adminGroup.GET("/load/users", middlewares.JWTAdminMiddleware(db), userController.GetUsers)
 
 		// auth routes
-		authGroup.POST("/register", userController.CreateUser)
+		authGroup.POST("/register", userController.RegisterUser)
 		authGroup.POST("/login", userController.Login)
 	}
 }

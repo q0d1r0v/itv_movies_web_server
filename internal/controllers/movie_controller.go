@@ -18,6 +18,15 @@ func NewMovieController(movieService services.MovieService) *MovieController {
 	return &MovieController{movieService}
 }
 
+// LoadMovies - Retrieve all movies
+//	@Summary		Retrieve all movies
+//	@Description	Returns a list of all available movies
+//	@Tags			Movie
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{array}		models.Movie
+//	@Failure		500	{object}	map[string]string
+//	@Router			/load/movies [get]
 func (c *MovieController) LoadMovies(ctx *gin.Context) {
 	movies, err := c.movieService.LoadMovies()
 	if err != nil {
@@ -27,6 +36,17 @@ func (c *MovieController) LoadMovies(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, movies)
 }
 
+// CreateMovie - Add a new movie
+//	@Summary		Add a new movie
+//	@Description	This endpoint is used to add a new movie
+//	@Tags			Movie
+//	@Accept			json
+//	@Produce		json
+//	@Param			movie	body		models.Movie	true	"New movie details"
+//	@Success		201		{object}	models.Movie
+//	@Failure		400		{object}	map[string]string
+//	@Failure		500		{object}	map[string]string
+//	@Router			/create/movie [post]
 func (c *MovieController) CreateMovie(ctx *gin.Context) {
 	var movie models.Movie
 	if err := ctx.ShouldBindJSON(&movie); err != nil {
@@ -48,6 +68,18 @@ func (c *MovieController) CreateMovie(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusCreated, movie)
 }
+
+// UpdateMovie - Update an existing movie
+//	@Summary		Update an existing movie
+//	@Description	This endpoint updates the details of an existing movie
+//	@Tags			Movie
+//	@Accept			json
+//	@Produce		json
+//	@Param			movie	body		models.Movie	true	"Updated movie details"
+//	@Success		200		{object}	map[string]string
+//	@Failure		400		{object}	map[string]string
+//	@Failure		500		{object}	map[string]string
+//	@Router			/update/movie [put]
 func (c *MovieController) UpdateMovie(ctx *gin.Context) {
 	var movie models.Movie
 	if err := ctx.ShouldBindJSON(&movie); err != nil {

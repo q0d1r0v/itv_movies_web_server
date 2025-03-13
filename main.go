@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "itv_movies_web_server/docs"
 	"itv_movies_web_server/internal/config"
 	"itv_movies_web_server/internal/controllers"
 	"itv_movies_web_server/internal/models"
@@ -11,8 +12,15 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+//	@title			ITV Movies Web Server API
+//	@version		1.0
+//	@description	API Docs for ITV Movies Web Server.
+//	@host			::host
+//	@BasePath		/
 func main() {
 	config.InitDatabase()
 
@@ -54,6 +62,7 @@ func main() {
 	transactionController := controllers.NewTransactionController(transactionService)
 
 	router := gin.Default()
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	routes.RegisterUserRoutes(router, userController, db)
 	routes.RegisterGenreRoutes(router, genreController, db)

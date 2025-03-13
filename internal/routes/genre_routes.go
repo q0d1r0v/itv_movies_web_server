@@ -13,6 +13,7 @@ func RegisterGenreRoutes(router *gin.Engine, genreController *controllers.GenreC
 	// userGroup := router.Group("/api/")
 	{
 		// admin routes
+		adminGroup.GET("/load/genres", middlewares.JWTAdminMiddleware(db), genreController.LoadGenres)
 		adminGroup.POST("/create/genre", middlewares.JWTAdminMiddleware(db), genreController.CreateGenre)
 
 		// user routes
