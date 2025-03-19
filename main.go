@@ -16,11 +16,6 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-//	@title			ITV Movies Web Server API
-//	@version		1.0
-//	@description	API Docs for ITV Movies Web Server.
-//	@host			::host
-//	@BasePath		/
 func main() {
 	config.InitDatabase()
 
