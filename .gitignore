@@ -40,6 +40,6 @@ config.json
 *.cover
 coverage.out
 
-# Docker & Container-related files
+# Docker & Container related files
 .dockerignore
 docker-compose.override.yml

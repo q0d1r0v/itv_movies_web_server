@@ -19,14 +19,14 @@ Ushbu platforma **yuqori yuklama va kengaytiriluvchanlikni** ta’minlash uchun 
 
 ## 🛠 Texnologik stek
 
-| Texnologiya    | Tavsif                                         |
-| -------------- | ---------------------------------------------- |
-| **Golang**     | Backend logika va API server                   |
-| **Gin**        | Tezkor va yengil HTTP framework                |
-| **GORM**       | Ma’lumotlar bazasi ORM                         |
-| **PostgreSQL** | Ma’lumotlar bazasi                             |
-| **UUID**       | Unikal identifikatorlar uchun                  |
-| **JWT**        | Avtorizatsiya (keyinchalik qo‘shilishi mumkin) |
+| Texnologiya    | Tavsif                          |
+| -------------- | ------------------------------- |
+| **Golang**     | Backend logika va API server    |
+| **Gin**        | Tezkor va yengil HTTP framework |
+| **GORM**       | Ma’lumotlar bazasi ORM          |
+| **PostgreSQL** | Ma’lumotlar bazasi              |
+| **UUID**       | Unikal identifikatorlar uchun   |
+| **JWT**        | Avtorizatsiya                   |
 
 ---
 
