@@ -1,6 +1,6 @@
-# 🎬 ITV Movies Web Server
+# 🎬 Movies Web Server
 
-ITV Movies Web Server – bu **zamonaviy onlayn kino platformasi**, foydalanuvchilarga **filmlarni tomosha qilish, sharh qoldirish, sevimlilarga qo‘shish va premium kontentga obuna bo‘lish** imkoniyatini taqdim etadi.
+Movies Web Server – bu **zamonaviy onlayn kino platformasi**, foydalanuvchilarga **filmlarni tomosha qilish, sharh qoldirish, sevimlilarga qo‘shish va premium kontentga obuna bo‘lish** imkoniyatini taqdim etadi.
 
 Ushbu platforma **yuqori yuklama va kengaytiriluvchanlikni** ta’minlash uchun **Golang** va **Gin framework** yordamida ishlab chiqilgan.
 
